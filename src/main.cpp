@@ -2,6 +2,7 @@
 #include "Player.hpp"
 #include "World.hpp"
 #include <iostream>
+#include <fstream>
 
 using namespace sf;
 using namespace std;
@@ -15,7 +16,8 @@ int main()
 
 	win.setPosition(Vector2i(100, 100));
 
-	World test ("test.world", 32.f);
+
+	World test ("worlds/test.world", 32.f);
 
 
 	while(win.isOpen())

@@ -15,7 +15,8 @@ Player::Player(Vector2f const& arg0, Vector2f const& arg1):RigidBody::RigidBody(
 														   celerity(7.5f),
 														   momentum_factor(0.4f),
 														   jump_force(16.f),
-														   fast_fall_force(5.f)
+														   fast_fall_force(5.f),
+														   dir(0)
 {
 	in_focus = true;
 }
@@ -48,6 +49,13 @@ void Player::setMomentumFactor(float arg)
 
 
 //Override
+void Player::update()
+{
+	speed.x = celerity * dir;
+
+	RigidBody::update();
+}
+
 string Player::toString() const
 {
 	return RigidBody::toString() + " Player";
@@ -68,10 +76,10 @@ void Player::process(sf::Event const& event)
 		switch(act)
 		{
 		case Action::Right:
-			speed.x = celerity;
+			dir = 1;
 		break;
 		case Action::Left:
-			speed.x = -celerity;
+			dir = -1;
 		break;
 		case Action::Up:
 			if(isOnGround())
@@ -97,13 +105,13 @@ void Player::process(sf::Event const& event)
 		switch(act)
 		{
 		case Action::Right:
-			if(speed.x > 0.f)
-				speed.x = 0.f;
+			if(dir > 0.f)
+				dir = 0;
 
 		break;
 		case Action::Left:
 			if(speed.x < 0.f)
-				speed.x = 0.f;
+				dir = 0;
 		break;
 		case Action::Up:
 			if(speed.y < 0.f)

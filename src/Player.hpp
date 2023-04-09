@@ -29,6 +29,7 @@ public:
 	void setMomentumFactor(float);
 
 	//Override RigidBody
+	virtual void update();
 	virtual std::string toString() const;
 	//Override EventListener
 	virtual void process(sf::Event const&);
@@ -39,6 +40,8 @@ private:
 	float jump_force;
 	float momentum_factor;
 	float fast_fall_force;
+	float dir;
+
 	std::map<sf::Keyboard::Key, Action> bindings;
 };
 
