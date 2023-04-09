@@ -5,9 +5,40 @@
 using namespace sf;
 using namespace std;
 
-World::World(string const& arg0, float arg1):passed(true)
+World::World(string const& arg0, float arg1):passed(true), file_path(arg0), unit(arg1)
 {
-	ifstream in (arg0);
+	int ext_ind (file_path.find("."));
+	if(ext_ind == string::npos)
+		ext_ind = file_path.size();
+	for(int i (file_path.size()-1);i >= 0;i--)
+	{
+		if(i < ext_ind)
+		{
+			if((i > 0 && file_path.at(i - 1) == '/') || i == 0)
+			{
+				string a;
+				a += toupper(file_path.at(i));
+				name =  a + name;
+				break;
+			}
+			else if(i < file_path.size() - 1 && file_path.at(i) == '_')
+				name = " " + name;
+			else
+				name = file_path.at(i) + name;
+		}
+	}
+}
+
+World::~World()
+{
+	unload();
+}
+
+bool World::load()
+{
+	unload();
+
+	ifstream in (file_path);
 
 	if(in)
 	{
@@ -20,12 +51,12 @@ World::World(string const& arg0, float arg1):passed(true)
 			{
 				if(line.at(i) == '1')
 				{
-					bodies.push_back(new Body(Vector2f(i * arg1, j * arg1), Vector2f(arg1, arg1)));
+					bodies.push_back(new Body(Vector2f(i * unit, j * unit), Vector2f(unit, unit)));
 				
 				}
 				else if(line.at(i) == '2')
 				{
-					bodies.push_back(new Player(Vector2f(i * arg1, j * arg1), Vector2f(arg1, arg1)));
+					bodies.push_back(new Player(Vector2f(i * unit, j * unit), Vector2f(unit, unit)));
 					cameras.push_back(Camera(Vector2f(0.f, 0.f), Vector2f(800.f, 450.f)));
 					(cameras.end()-1)->follow(*(*(bodies.end()-1)));
 				}
@@ -33,26 +64,23 @@ World::World(string const& arg0, float arg1):passed(true)
 
 			j ++;
 		}
+
+		cout << "World \"" << name << "\" loaded successfully from file \"" << file_path << "\"" << endl;
+		in.close();
+		return true;
 	}
 	else
 	{
-		cout << "/!\\ Failed to load world from " << arg0 << " /!\\" << endl;
+		cout << "/!\\ World \"" << name << "\" failed to load from file \"" << file_path << "\" /!\\" << endl;
+		in.close();
+		return false;
 	}
-
-	in.close();
-
-}
-
-World::~World()
-{
-	for(Body * body_ptr : bodies)
-		delete body_ptr;
 }
 
 void World::work(RenderWindow & arg)
 {
 
-	if(cameras.size() >= 0)
+	if(cameras.size() > 0)
 		arg.setView(cameras.at(0));
 
 	for(Camera & cam_ref : cameras)
@@ -104,4 +132,19 @@ void World::passEvent(Event const& arg)
 
 	to_pass = arg;
 	passed = false;
+}
+
+string World::getName() const
+{
+	return name;
+}
+
+void World::unload()
+{
+	for(Body * body_ptr : bodies)
+		delete body_ptr;
+	bodies.clear();
+	cameras.clear();
+
+	passed = true;
 }

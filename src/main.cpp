@@ -18,7 +18,7 @@ int main()
 
 
 	World test ("worlds/test.world", 32.f);
-
+	test.load();
 
 	while(win.isOpen())
 	{

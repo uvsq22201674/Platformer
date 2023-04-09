@@ -14,14 +14,24 @@ public:
 	World(std::string const&, float);
 	virtual ~World();
 
+	bool load();
+	void unload();
+
 	void work(sf::RenderWindow & arg);
 	void passEvent(sf::Event const&);
 
+	std::string getName() const;
+
 private:
 
-	sf::Event to_pass;
 	bool passed;
+
+	sf::Event to_pass;
 	sf::RectangleShape visual;
+
+	std::string name;
+	std::string file_path;
+	float unit;
 
 	std::vector<Body*> bodies;
 	std::vector<Camera> cameras;
