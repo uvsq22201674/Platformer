@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <fstream>
 
 using namespace sf;
 using namespace std;
@@ -144,13 +145,16 @@ private:
 			text.setString(text.getString() + Clipboard::getString());
 		}
 
+		if(arg == Keyboard::Slash)
+			text.setString(text.getString() + '/');
+
 		if(arg < 26)
 			text.setString(text.getString() + (char) (65 + (int) arg));
 		else if(arg > 25 && arg < 36)
 			text.setString(text.getString() + (char) (48 + (int) arg - 26));
 		else if(arg > 74 && arg < 85)
 			text.setString(text.getString() + (char) (48 + (int) arg - 75));
-		else if(arg == Keyboard::Period)
+		else if(arg == Keyboard::Period || arg == Keyboard::SemiColon)
 			text.setString(text.getString() + ".");
 		else if(arg == Keyboard::Space)
 			text.setString(text.getString() + " ");
@@ -287,12 +291,18 @@ int main(int argc, char ** argv)
 	Button toggle_grid ({20.f, 410.f, 100.f, 30.f}, "Grid");
 	Button place ({20.f, 10.f, 100.f, 30.f}, "Place");
 		PlaceButton platform ({20.f, 50.f, 100.f, 30.f}, "Platform", &place);
-		PlaceButton spike    ({130.f, 50.f, 100.f, 30.f}, "Spike", &place);
-		PlaceButton player    ({240.f, 50.f, 100.f, 30.f}, "Player", &place);
+		PlaceButton spike    ({20.f, 90.f, 100.f, 30.f}, "Spike", &place);
+		PlaceButton player   ({20.f, 130.f, 100.f, 30.f}, "Player", &place);
 
 	Button save ({130.f, 10.f, 100.f, 30.f}, "Save");
+		LineEdit path ({130.f, 50.f, 100.f, 30.f}, "default.lvl", &save);
+		Button ok ({130.f, 90.f, 100.f, 30.f}, "OK !", &save);
 
-	Widget * widgets[] = {&toggle_grid, &place, &platform, &spike, &player, &save};
+	Button load ({240.f, 10.f, 100.f, 30.f}, "Load");
+		LineEdit lpath ({240.f, 50.f, 100.f, 30.f}, "default.lvl", &load);
+		Button lok ({240.f, 90.f, 100.f, 30.f}, "OK !", &load);
+
+	Widget * widgets[] = {&toggle_grid, &place, &platform, &spike, &player, &save, &path, &ok, &load, &lpath, &lok};
 
 	toggle_grid.activated = true;
 
@@ -360,6 +370,131 @@ int main(int argc, char ** argv)
 			if(skip_event)
 				continue;
 
+
+			if(ok.activated)
+			{
+				ok.activated = false;
+
+				ofstream out (path.text.getString().toAnsiString());
+
+				if(out)
+				{
+					for(Object const& obj : placed)
+					{
+						out << obj.name << endl << '{' << endl;
+						out << "	position : [" << obj.pos.x << ", " << obj.pos.y << "]," << endl;
+						out << "	size : [" << obj.size.x << ", " << obj.size.y << "]";
+						if(obj.options != "")
+							out << ',' << endl << "    options : \"" << obj.options << "\"";
+						out << endl << '}' << endl;
+					}
+
+					cout << "Sauvegardé avec succès dans " << path.text.getString().toAnsiString() << endl;
+				}
+				else
+					cout << "/!\\ Erreur : Fichier " << path.text.getString().toAnsiString() << " inutilisable !" << endl;
+			}
+
+			if(lok.activated)
+			{
+				lok.activated = false;
+
+				placed.clear();
+
+				ifstream in (lpath.text.getString().toAnsiString());
+
+				if(in)
+				{
+					int state (0);
+
+					string line;
+
+					while(getline(in, line))
+					{
+						string cop;
+						for(char c : line)
+						{
+							if(c != ' ' and c != '\t')
+								cop += c;
+						}
+						line = cop;
+						
+						if(state == 0)
+						{
+							placed.push_back(Object({line}));
+							
+							state ++;
+						}
+						else if(state == 1)
+						{
+							if(line.find('}') != string::npos)
+							{
+
+								if(placed.at(placed.size()-1).name == "Platform")
+									placed.at(placed.size()-1).color = Color::White;
+								else if(placed.at(placed.size()-1).name == "Spike")
+									placed.at(placed.size()-1).color = Color::Red;
+								else if(placed.at(placed.size()-1).name == "Player")
+									placed.at(placed.size()-1).color = Color::Yellow;
+
+								state = 0;
+								continue;
+							}
+
+							string buffer;
+							string attrib;
+							int stat (0);
+
+							for(int i (0); i < line.size(); i++)
+							{
+								if(line.at(i) == ':')
+								{
+									if(buffer == "position" || buffer == "size")
+										i++;
+									attrib = buffer;
+									buffer = "";
+									stat = 1;
+								}
+								else if(line.at(i) == ',' && stat == 1)
+								{
+									if(attrib == "options")
+									{
+										placed.at(placed.size() - 1).options = buffer;
+										break;
+									}
+
+									if(attrib == "position")
+									{
+										placed.at(placed.size() - 1).pos.x = stoi(buffer);
+									}
+									else if(attrib == "size")
+										placed.at(placed.size() - 1).size.x = stoi(buffer);
+
+									stat = 2;
+
+									buffer = "";
+								}
+								else if((line.at(i) == ',' || i == line.size() - 1) && stat == 2)
+								{
+									if(attrib == "position")
+										placed.at(placed.size() - 1).pos.y = stoi(buffer);
+									else if(attrib == "size")
+										placed.at(placed.size() - 1).size.y = stoi(buffer);
+
+									break;
+								}
+								else
+									buffer += line.at(i);
+							}
+						}
+
+					}
+
+					cout << "Fichier " << lpath.text.getString().toAnsiString() << " chargé !" << endl;
+				}
+				else
+					cout << "/!\\ Erreur : Fichier " << lpath.text.getString().toAnsiString() << " illisible !" << endl;
+			}
 
 			switch(event.type)
 			{
