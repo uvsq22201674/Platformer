@@ -204,6 +204,8 @@ void World::work(RenderWindow & arg)
 			visual.setFillColor(Color::Red);
 		else if(body_ptr->toString().find("Player")!=string::npos)
 			visual.setFillColor(Color::Yellow);
+		else if(body_ptr->toString().find("Checkpoint")!=string::npos)
+			visual.setFillColor(Color::Green);
 
 		arg.draw(visual);
 	}

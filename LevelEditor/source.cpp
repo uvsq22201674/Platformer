@@ -292,9 +292,10 @@ int main(int argc, char ** argv)
 
 	Button toggle_grid ({20.f, 410.f, 100.f, 30.f}, "Grid");
 	Button place ({20.f, 10.f, 100.f, 30.f}, "Place");
-		PlaceButton platform ({20.f, 50.f, 100.f, 30.f}, "Platform", &place);
-		PlaceButton spike    ({20.f, 90.f, 100.f, 30.f}, "Spike", &place);
-		PlaceButton player   ({20.f, 130.f, 100.f, 30.f}, "Player", &place);
+		PlaceButton platform   ({20.f, 50.f, 100.f, 30.f}, "Platform", &place);
+		PlaceButton spike      ({20.f, 90.f, 100.f, 30.f}, "Spike", &place);
+		PlaceButton player     ({20.f, 130.f, 100.f, 30.f}, "Player", &place);
+		PlaceButton checkpoint ({20.f, 170.f, 100.f, 30.f}, "Checkpoint", &place);
 
 	Button save ({130.f, 10.f, 100.f, 30.f}, "Save");
 		LineEdit path ({130.f, 50.f, 100.f, 30.f}, "default.lvl", &save);
@@ -304,7 +305,7 @@ int main(int argc, char ** argv)
 		LineEdit lpath ({240.f, 50.f, 100.f, 30.f}, "default.lvl", &load);
 		Button lok ({240.f, 90.f, 100.f, 30.f}, "OK !", &load);
 
-	Widget * widgets[] = {&toggle_grid, &place, &platform, &spike, &player, &save, &path, &ok, &load, &lpath, &lok};
+	Widget * widgets[] = {&toggle_grid, &place, &platform, &spike, &player, &save, &path, &ok, &load, &lpath, &lok, &checkpoint};
 
 	toggle_grid.activated = true;
 
@@ -438,6 +439,8 @@ int main(int argc, char ** argv)
 									placed.at(placed.size()-1).color = Color::Red;
 								else if(placed.at(placed.size()-1).name == "Player")
 									placed.at(placed.size()-1).color = Color::Yellow;
+								else if(placed.at(placed.size()-1).name == "Checkpoint")
+									placed.at(placed.size()-1).color = Color::Green;
 
 								state = 0;
 								continue;
