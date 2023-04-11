@@ -1,5 +1,6 @@
 #include "World.hpp"
 #include "Spike.hpp"
+#include "Checkpoint.hpp"
 #include <fstream>
 #include <iostream>
 
@@ -67,6 +68,10 @@ bool World::load()
 				else if(line == "Spike")
 				{
 					bodies.push_back(new Spike());
+				}
+				else if(line == "Checkpoint")
+				{
+					bodies.push_back(new Checkpoint());
 				}
 				else if(line == "Player")
 				{

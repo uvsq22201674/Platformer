@@ -562,6 +562,8 @@ int main(int argc, char ** argv)
 						placing.color = Color::Red;
 					else if(placing.name == "Player")
 						placing.color = Color::Yellow;
+					else if(placing.name == "Checkpoint")
+						placing.color = Color::Green;
 
 					if(placing.size.x != 0.f && placing.size.y != 0)
 					{

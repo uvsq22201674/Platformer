@@ -61,14 +61,18 @@ void Player::update()
 }
 bool Player::collides(Body const& arg)
 {
+
 	bool c (RigidBody::collides(arg));
 
 	if(c)
 	{
 		if(arg.toString().find("Spike") != string::npos)
+		{
 			setCenter(spawn);
+			speed = speed * 0.f;
+		}
 		if(arg.toString().find("Checkpoint") != string::npos)
-			spawn = arg.getCenter();
+			spawn = getCenter();
 	}
 
 

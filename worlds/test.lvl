@@ -308,3 +308,13 @@ Platform
 	position : [1088, -192],
 	size : [48, 48]
 }
+Checkpoint
+{
+	position : [192, 48],
+	size : [32, 32]
+}
+Checkpoint
+{
+	position : [1360, -272],
+	size : [176, 128]
+}
