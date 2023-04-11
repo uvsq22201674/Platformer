@@ -1,11 +1,12 @@
 #include "World.hpp"
+#include "Spike.hpp"
 #include <fstream>
 #include <iostream>
 
 using namespace sf;
 using namespace std;
 
-World::World(string const& arg0, float arg1):passed(true), file_path(arg0), unit(arg1)
+World::World(string const& arg0, float arg1):file_path(arg0), unit(arg1)
 {
 	int ext_ind (file_path.find("."));
 	if(ext_ind == string::npos)
@@ -42,44 +43,122 @@ bool World::load()
 
 	if(in)
 	{
+		int state (0);
+
 		string line;
-		int j (0);
+
 		while(getline(in, line))
 		{
-			Vector2f size_buffer;
-			for(int i (0); i < line.size(); i++)
+			string cop;
+			for(char c : line)
 			{
-				if(line.at(i) == '1')
-				{
-					bodies.push_back(new Body(Vector2f(i * unit, j * unit), Vector2f(unit, unit)));
+				if(c != ' ' and c != '\t')
+					cop += c;
+			}
+			line = cop;
+			
+			if(state == 0)
+			{
 				
-				}
-				else if(line.at(i) == '2')
+				if(line == "Platform")
 				{
-					bodies.push_back(new Player(Vector2f(i * unit, j * unit), Vector2f(unit, unit)));
+					bodies.push_back(new Body());
+				}
+				else if(line == "Spike")
+				{
+					bodies.push_back(new Spike());
+				}
+				else if(line == "Player")
+				{
+					bodies.push_back(new Player());
 					cameras.push_back(Camera(Vector2f(0.f, 0.f), Vector2f(800.f, 450.f)));
-					(cameras.end()-1)->follow(*(*(bodies.end()-1)));
+					cameras.at(cameras.size() - 1).follow(*bodies.at(bodies.size() - 1));
+				}
+
+				state ++;
+			}
+			else if(state == 1)
+			{
+				if(line.find('}') != string::npos)
+				{
+					bodies.at(bodies.size()-1)->setCenter(bodies.at(bodies.size()-1)->getCenter() + bodies.at(bodies.size()-1)->getSize()/2.f);
+
+					state = 0;
+					continue;
+				}
+
+				string buffer;
+				string attrib;
+				int stat (0);
+
+				for(int i (0); i < line.size(); i++)
+				{
+					if(line.at(i) == ':')
+					{
+						if(buffer == "position" || buffer == "size")
+							i++;
+						attrib = buffer;
+						buffer = "";
+						stat = 1;
+					}
+					else if(line.at(i) == ',' && stat == 1)
+					{
+						if(attrib == "options")
+						{
+							//TODO
+							break;
+						}
+
+						if(attrib == "position")
+						{
+							bodies.at(bodies.size()-1)->setCenter(Vector2f(stoi(buffer), 0));
+						}
+						else if(attrib == "size")
+							bodies.at(bodies.size()-1)->setSize(Vector2f(stoi(buffer), 0));
+
+						stat = 2;
+
+						buffer = "";
+					}
+					else if((line.at(i) == ',' || i == line.size() - 1) && stat == 2)
+					{
+						if(attrib == "position")
+						{
+							bodies.at(bodies.size()-1)->setCenter(bodies.at(bodies.size()-1)->getCenter() + Vector2f(0, stoi(buffer)));
+							
+							if((*(bodies.end()-1))->toString().find("Player") != string::npos)
+							{
+								Player * p ((Player*) *(bodies.end()-1));
+								p->setSpawn(p->getCenter());
+							}
+						}
+						else if(attrib == "size")
+							bodies.at(bodies.size()-1)->setSize(bodies.at(bodies.size()-1)->getSize() + Vector2f(0, stoi(buffer)));
+
+						break;
+					}
+					else
+						buffer += line.at(i);
 				}
 			}
 
-			j ++;
 		}
 
-		cout << "World \"" << name << "\" loaded successfully from file \"" << file_path << "\"" << endl;
-		in.close();
+		cout << "Fichier " << file_path << " chargé !" << endl;
+		
 		return true;
 	}
 	else
 	{
-		cout << "/!\\ World \"" << name << "\" failed to load from file \"" << file_path << "\" /!\\" << endl;
-		in.close();
+		cout << "/!\\ Erreur : Fichier " << file_path << " illisible !" << endl;
+		
 		return false;
 	}
+
 }
 
 void World::work(RenderWindow & arg)
 {
-
 	if(cameras.size() > 0)
 		arg.setView(cameras.at(0));
 
@@ -90,15 +169,22 @@ void World::work(RenderWindow & arg)
 
 	for(Body * body_ptr : bodies)
 	{
-		if(!passed)
-		{
-			if(body_ptr->toString().find("Player") != string::npos)
-			{
-				Player * player ((Player*) body_ptr);
+		FloatRect box0 ({body_ptr->getCenter().x - body_ptr->getSize().x/2.f, body_ptr->getCenter().y - body_ptr->getSize().y/2.f, body_ptr->getSize().x, body_ptr->getSize().y});
+		FloatRect box1 ({cameras[0].getCenter().x - cameras[0].getSize().x/2.f, cameras[0].getCenter().y - cameras[0].getSize().y/2.f, cameras[0].getSize().x, cameras[0].getSize().y});
+		
 
-				player->reactTo(to_pass);
-				passed = true;
-			}
+		if(box0.left > box1.left + box1.width
+		|| box0.left + box0.width < box1.left
+		|| box0.top > box1.top + box1.height
+		|| box0.top + box0.height < box1.top)
+			continue;
+
+		if(body_ptr->toString().find("Player") != string::npos)
+		{
+			Player * player ((Player*) body_ptr);
+
+			for(Event const& e:event_queue)
+				player->reactTo(e);
 		}
 
 		for(Body * body_ptr1 : bodies)
@@ -113,12 +199,19 @@ void World::work(RenderWindow & arg)
 
 		visual.setPosition(body_ptr->getCenter() - body_ptr->getSize() / 2.f);
 		visual.setSize(body_ptr->getSize());
-		
+		visual.setFillColor(Color::White);
+		if(body_ptr->toString().find("Spike")!=string::npos)
+			visual.setFillColor(Color::Red);
+		else if(body_ptr->toString().find("Player")!=string::npos)
+			visual.setFillColor(Color::Yellow);
+
 		arg.draw(visual);
 	}
+
+	event_queue.clear();
 }
 
-void World::passEvent(Event const& arg)
+void World::addToEventQueue(Event const& arg)
 {
 	if(arg.type == Event::KeyPressed && cameras.size() > 0)
 	{
@@ -130,8 +223,7 @@ void World::passEvent(Event const& arg)
 			cameras.at(0).doStunt(Stunt::QuickZoom);
 	}
 
-	to_pass = arg;
-	passed = false;
+	event_queue.push_back(arg);
 }
 
 string World::getName() const
@@ -145,6 +237,5 @@ void World::unload()
 		delete body_ptr;
 	bodies.clear();
 	cameras.clear();
-
-	passed = true;
+	event_queue.clear();
 }

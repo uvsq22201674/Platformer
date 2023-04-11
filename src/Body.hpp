@@ -18,7 +18,9 @@ public:
 	sf::Vector2f getCenter() const;
 	sf::Vector2f getSpeed() const;
 	sf::Vector2f getSize() const;
+
 	bool isOnGround() const;
+	bool isOnWall() const;
 
 	//Setters
 
@@ -33,11 +35,14 @@ protected:
 
 private:
 
-	bool new_loop;
+	bool collided_ground;
+	bool collided_wall;
 
 	sf::Vector2f center;
 	sf::Vector2f size;
+
 	bool on_ground;
+	bool on_wall;
 };
 
 #endif

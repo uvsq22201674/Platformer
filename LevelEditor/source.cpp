@@ -148,8 +148,10 @@ private:
 		if(arg == Keyboard::Slash)
 			text.setString(text.getString() + '/');
 
-		if(arg < 26)
+		if(arg < 26 and (Keyboard::isKeyPressed(Keyboard::LShift) || Keyboard::isKeyPressed(Keyboard::RShift)))
 			text.setString(text.getString() + (char) (65 + (int) arg));
+		else if(arg < 26)
+			text.setString(text.getString() + (char) (97 + (int) arg));
 		else if(arg > 25 && arg < 36)
 			text.setString(text.getString() + (char) (48 + (int) arg - 26));
 		else if(arg > 74 && arg < 85)
@@ -494,6 +496,8 @@ int main(int argc, char ** argv)
 				}
 				else
 					cout << "/!\\ Erreur : Fichier " << lpath.text.getString().toAnsiString() << " illisible !" << endl;
+				
+				in.close();
 			}
 
 			switch(event.type)

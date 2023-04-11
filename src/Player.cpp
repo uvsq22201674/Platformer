@@ -1,6 +1,7 @@
 #include "Player.hpp"
 #include <utility>
 #include <cmath>
+#include <iostream>
 
 using namespace sf;
 using namespace std;
@@ -46,16 +47,27 @@ void Player::setMomentumFactor(float arg)
 {
 	momentum_factor = arg;
 }
+void Player::setSpawn(Vector2f arg)
+{
+	spawn = arg;
+}
 
 
 //Override
 void Player::update()
 {
-	speed.x = celerity * dir;
-
 	RigidBody::update();
+	speed.x = celerity * dir;
 }
+bool Player::collides(Body const& arg)
+{
+	bool c (RigidBody::collides(arg));
 
+	if(c && arg.toString().find("Spike") != string::npos)
+		setCenter(spawn);
+
+	return c;
+}
 string Player::toString() const
 {
 	return RigidBody::toString() + " Player";

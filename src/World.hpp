@@ -18,17 +18,15 @@ public:
 	void unload();
 
 	void work(sf::RenderWindow & arg);
-	void passEvent(sf::Event const&);
+	void addToEventQueue(sf::Event const&);
 
 	std::string getName() const;
 
 private:
 
-	bool passed;
-
-	sf::Event to_pass;
 	sf::RectangleShape visual;
 
+	std::vector<sf::Event> event_queue;
 	std::string name;
 	std::string file_path;
 	float unit;

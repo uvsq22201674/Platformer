@@ -1,17 +1,20 @@
 #include "Body.hpp"
 #include <iostream>
+#include <cmath>
 
 using namespace sf;
 using namespace std;
 
-Body::Body(sf::Vector2f arg0, sf::Vector2f arg1):center(arg0), size(arg1), on_ground(false), physics (false), new_loop(true)
+Body::Body(sf::Vector2f arg0, sf::Vector2f arg1):center(arg0), size(arg1), on_ground(false), on_wall(false), physics (false), collided_ground(false), collided_wall(false)
 {}
 
 void Body::update()
 {
 	center += speed;
 
-	new_loop = true;
+	collided_wall = false;	
+
+	collided_ground = false;
 }
 bool Body::collides(Body const& arg)
 {
@@ -28,47 +31,55 @@ bool Body::collides(Body const& arg)
 	|| dis.left >= oth.left + oth.width
 	|| dis.top >= oth.top + oth.height)
 	{
-		if(new_loop)
+		if(!collided_ground)
 		{
 			on_ground = false;
+		}
+		if(!collided_wall)
+		{
+			on_wall = false;
 		}
 		
 		return false;
 	}
 	else if(physics)
 	{
-		if(dis.top + dis.height < oth.top + speed.y + 10.f)
-		{
-			speed.y = 0;
-			center.y = oth.top - size.y / 2.f;
 
-			on_ground = true;
-		}
-		else if(dis.left + dis.width < oth.left + speed.x + 10.f)
+		
+		if(dis.left + dis.width < oth.left + speed.x + 10.f && dis.top + 1 >= oth.top)
 		{
 			speed.x = 0;
-			center.x = oth.left - size.x / 2.f;
+			center.x = oth.left - size.x / 2.f ;
+
+			on_wall = true;
+			collided_wall = true;
 		}
-		else if(dis.left > oth.left + oth.width + speed.x - 10.f)
+		else if(dis.left > oth.left + oth.width + speed.x - 10.f && dis.top + 1 >= oth.top)
 		{
 			speed.x = 0;
-			center.x = oth.left + oth.height + size.x / 2.f;
+			center.x = oth.left + oth.width + size.x / 2.f;
+
+			on_wall = true;
+			collided_wall = true;
 		}
 		else if(dis.top > oth.top + oth.height + speed.y - 10.f)
 		{
 			speed.y = 0;
 			center.y = oth.top + oth.height + size.y / 2.f;
 		}
+		else if(dis.top + dis.height < oth.top + speed.y + 10.f)
+		{
+			speed.y = 0;
+			center.y = oth.top - size.y / 2.f;
 
-		new_loop = false;
+			on_ground = true;
+			collided_ground = true;
+		}
 
 		return true;
 	}
 	else
-	{
-		new_loop = false;
 		return true;
-	}
 }
 
 string Body::toString() const
@@ -93,6 +104,10 @@ Vector2f Body::getSpeed() const
 bool Body::isOnGround() const
 {
 	return on_ground;
+}
+bool Body::isOnWall() const
+{
+	return on_wall;
 }
 
 //Setters

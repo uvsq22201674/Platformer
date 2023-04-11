@@ -17,7 +17,7 @@ int main()
 	win.setPosition(Vector2i(100, 100));
 
 
-	World test ("worlds/test.world", 32.f);
+	World test ("worlds/test.lvl", 32.f);
 	test.load();
 
 	while(win.isOpen())
@@ -26,16 +26,17 @@ int main()
 
 		while(win.pollEvent(event))
 		{
+			test.addToEventQueue(event);
 			switch(event.type)
 			{
 				case Event::Closed:
 					win.close();
 				break;
 				case Event::KeyPressed:
-					test.passEvent(event);
+					//test.addToEventQueue(event);
 				break;
 				case Event::KeyReleased:
-					test.passEvent(event);
+					//test.addToEventQueue(event);
 				break;
 			}
 		}

@@ -27,9 +27,11 @@ public:
 	void setCelerity(float);
 	void setJumpForce(float);
 	void setMomentumFactor(float);
+	void setSpawn(sf::Vector2f);
 
 	//Override RigidBody
 	virtual void update();
+	virtual bool collides(Body const&);
 	virtual std::string toString() const;
 	//Override EventListener
 	virtual void process(sf::Event const&);
@@ -41,6 +43,8 @@ private:
 	float momentum_factor;
 	float fast_fall_force;
 	float dir;
+
+	sf::Vector2f spawn;
 
 	std::map<sf::Keyboard::Key, Action> bindings;
 };

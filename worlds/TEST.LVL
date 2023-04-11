@@ -1,0 +1,10 @@
+Platform
+{
+	position : [112, 304],
+	size : [592, 64]
+}
+Player
+{
+	position : [304, 128],
+	size : [32, 32]
+}
