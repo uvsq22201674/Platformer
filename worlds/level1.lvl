@@ -1,0 +1,860 @@
+Platform
+{
+	position : [160, 48],
+	size : [80, 560]
+}
+Spike
+{
+	position : [240, 560],
+	size : [3216, 48]
+}
+Platform
+{
+	position : [240, 368],
+	size : [624, 240]
+}
+Player
+{
+	position : [288, 176],
+	size : [32, 64]
+}
+Platform
+{
+	position : [864, 384],
+	size : [112, 224]
+}
+Platform
+{
+	position : [976, 400],
+	size : [80, 208]
+}
+Platform
+{
+	position : [1056, 416],
+	size : [64, 192]
+}
+Platform
+{
+	position : [1120, 432],
+	size : [48, 176]
+}
+Platform
+{
+	position : [1168, 448],
+	size : [32, 160]
+}
+Platform
+{
+	position : [1200, 464],
+	size : [16, 144]
+}
+Platform
+{
+	position : [1216, 496],
+	size : [16, 112]
+}
+Platform
+{
+	position : [1232, 544],
+	size : [16, 64]
+}
+Platform
+{
+	position : [1248, 576],
+	size : [16, 32]
+}
+Platform
+{
+	position : [1328, 496],
+	size : [16, 112]
+}
+Platform
+{
+	position : [1344, 432],
+	size : [32, 176]
+}
+Platform
+{
+	position : [1376, 320],
+	size : [48, 288]
+}
+Platform
+{
+	position : [1392, 96],
+	size : [560, 160]
+}
+Platform
+{
+	position : [1424, 384],
+	size : [160, 224]
+}
+Platform
+{
+	position : [1584, 432],
+	size : [272, 176]
+}
+Platform
+{
+	position : [1856, 464],
+	size : [48, 144]
+}
+Platform
+{
+	position : [1904, 496],
+	size : [16, 112]
+}
+Platform
+{
+	position : [1920, 528],
+	size : [16, 80]
+}
+Platform
+{
+	position : [1936, 576],
+	size : [16, 32]
+}
+Platform
+{
+	position : [1984, 464],
+	size : [144, 16]
+}
+Platform
+{
+	position : [2000, 480],
+	size : [112, 16]
+}
+Platform
+{
+	position : [2032, 496],
+	size : [64, 16]
+}
+Platform
+{
+	position : [2064, 512],
+	size : [32, 16]
+}
+Platform
+{
+	position : [2080, 528],
+	size : [16, 80]
+}
+Platform
+{
+	position : [2352, 464],
+	size : [208, 16]
+}
+Platform
+{
+	position : [2368, 480],
+	size : [144, 48]
+}
+Platform
+{
+	position : [2384, 528],
+	size : [64, 48]
+}
+Platform
+{
+	position : [2400, 576],
+	size : [32, 32]
+}
+Platform
+{
+	position : [2688, 368],
+	size : [176, 16]
+}
+Platform
+{
+	position : [2832, 240],
+	size : [16, 16]
+}
+Spike
+{
+	position : [2800, 352],
+	size : [128, 16]
+}
+Spike
+{
+	position : [2880, 368],
+	size : [80, 16]
+}
+Spike
+{
+	position : [2896, 384],
+	size : [80, 32]
+}
+Spike
+{
+	position : [2912, 416],
+	size : [80, 64]
+}
+Spike
+{
+	position : [2928, 480],
+	size : [80, 80]
+}
+Platform
+{
+	position : [2784, 320],
+	size : [16, 48]
+}
+Platform
+{
+	position : [2800, 320],
+	size : [64, 32]
+}
+Spike
+{
+	position : [2800, 320],
+	size : [16, 16]
+}
+Platform
+{
+	position : [2560, 192],
+	size : [16, 16]
+}
+Platform
+{
+	position : [2352, 144],
+	size : [32, 16]
+}
+Platform
+{
+	position : [1952, 96],
+	size : [256, 16]
+}
+Platform
+{
+	position : [1952, 112],
+	size : [144, 16]
+}
+Platform
+{
+	position : [1952, 128],
+	size : [80, 16]
+}
+Platform
+{
+	position : [1952, 144],
+	size : [48, 16]
+}
+Platform
+{
+	position : [1952, 160],
+	size : [32, 16]
+}
+Platform
+{
+	position : [1952, 176],
+	size : [16, 32]
+}
+Platform
+{
+	position : [3104, 240],
+	size : [464, 48]
+}
+Platform
+{
+	position : [3200, 288],
+	size : [368, 48]
+}
+Platform
+{
+	position : [3280, 336],
+	size : [288, 48]
+}
+Platform
+{
+	position : [3344, 384],
+	size : [224, 48]
+}
+Platform
+{
+	position : [3568, 176],
+	size : [128, 432]
+}
+Platform
+{
+	position : [3696, 240],
+	size : [464, 48]
+}
+Platform
+{
+	position : [3696, 288],
+	size : [368, 48]
+}
+Platform
+{
+	position : [3696, 336],
+	size : [288, 48]
+}
+Platform
+{
+	position : [3696, 384],
+	size : [224, 48]
+}
+Spike
+{
+	position : [3584, 192],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3648, 192],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3568, 224],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3584, 240],
+	size : [96, 16]
+}
+Spike
+{
+	position : [3680, 224],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3600, 256],
+	size : [64, 16]
+}
+Spike
+{
+	position : [3616, 272],
+	size : [32, 16]
+}
+Platform
+{
+	position : [3600, 240],
+	size : [16, 16]
+}
+Platform
+{
+	position : [3648, 240],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3584, 256],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3664, 256],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3600, 272],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3648, 272],
+	size : [16, 16]
+}
+Platform
+{
+	position : [3616, 272],
+	size : [16, 16]
+}
+Platform
+{
+	position : [3584, 160],
+	size : [96, 16]
+}
+Spike
+{
+	position : [3408, 336],
+	size : [160, 16]
+}
+Spike
+{
+	position : [3312, 272],
+	size : [256, 16]
+}
+Spike
+{
+	position : [3472, 400],
+	size : [96, 16]
+}
+Spike
+{
+	position : [3280, 288],
+	size : [48, 16]
+}
+Spike
+{
+	position : [3264, 304],
+	size : [48, 32]
+}
+Spike
+{
+	position : [3248, 336],
+	size : [48, 48]
+}
+Spike
+{
+	position : [3232, 384],
+	size : [48, 64]
+}
+Spike
+{
+	position : [3216, 448],
+	size : [48, 80]
+}
+Spike
+{
+	position : [3200, 528],
+	size : [48, 32]
+}
+Spike
+{
+	position : [3392, 352],
+	size : [32, 16]
+}
+Spike
+{
+	position : [3376, 368],
+	size : [32, 32]
+}
+Spike
+{
+	position : [3360, 400],
+	size : [32, 48]
+}
+Spike
+{
+	position : [3344, 448],
+	size : [32, 64]
+}
+Spike
+{
+	position : [3328, 512],
+	size : [32, 48]
+}
+Spike
+{
+	position : [3456, 416],
+	size : [32, 16]
+}
+Spike
+{
+	position : [3456, 432],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3440, 448],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3424, 496],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3408, 544],
+	size : [32, 16]
+}
+Spike
+{
+	position : [3456, 560],
+	size : [112, 48]
+}
+Spike
+{
+	position : [3696, 272],
+	size : [336, 16]
+}
+Spike
+{
+	position : [3696, 352],
+	size : [208, 16]
+}
+Spike
+{
+	position : [3696, 400],
+	size : [96, 16]
+}
+Spike
+{
+	position : [3696, 560],
+	size : [1920, 48]
+}
+Spike
+{
+	position : [4016, 288],
+	size : [80, 16]
+}
+Spike
+{
+	position : [4032, 304],
+	size : [80, 32]
+}
+Spike
+{
+	position : [4048, 336],
+	size : [80, 48]
+}
+Spike
+{
+	position : [4064, 384],
+	size : [80, 64]
+}
+Spike
+{
+	position : [4080, 448],
+	size : [80, 80]
+}
+Spike
+{
+	position : [4096, 528],
+	size : [80, 32]
+}
+Spike
+{
+	position : [3888, 368],
+	size : [32, 16]
+}
+Spike
+{
+	position : [3904, 384],
+	size : [32, 32]
+}
+Spike
+{
+	position : [3920, 416],
+	size : [32, 48]
+}
+Spike
+{
+	position : [3936, 464],
+	size : [32, 64]
+}
+Spike
+{
+	position : [3952, 528],
+	size : [32, 32]
+}
+Spike
+{
+	position : [3792, 400],
+	size : [16, 32]
+}
+Spike
+{
+	position : [3792, 448],
+	size : [16, 16]
+}
+Spike
+{
+	position : [3808, 512],
+	size : [16, 16]
+}
+Platform
+{
+	position : [4336, 288],
+	size : [272, 16]
+}
+Platform
+{
+	position : [4352, 304],
+	size : [256, 32]
+}
+Platform
+{
+	position : [4368, 336],
+	size : [240, 48]
+}
+Platform
+{
+	position : [4384, 384],
+	size : [224, 64]
+}
+Platform
+{
+	position : [4400, 448],
+	size : [208, 80]
+}
+Platform
+{
+	position : [4416, 528],
+	size : [192, 80]
+}
+Platform
+{
+	position : [4608, 352],
+	size : [176, 256]
+}
+Platform
+{
+	position : [4800, 352],
+	size : [16, 16]
+}
+Platform
+{
+	position : [4832, 384],
+	size : [16, 16]
+}
+Platform
+{
+	position : [4864, 400],
+	size : [16, 16]
+}
+Platform
+{
+	position : [4896, 400],
+	size : [16, 16]
+}
+Platform
+{
+	position : [4928, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [4960, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [4992, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5024, 432],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5056, 432],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5088, 432],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5120, 432],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5152, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5184, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5216, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5248, 400],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5280, 400],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5312, 384],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5344, 352],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5344, 256],
+	size : [256, 32]
+}
+Platform
+{
+	position : [5312, 272],
+	size : [32, 16]
+}
+Platform
+{
+	position : [5600, 272],
+	size : [32, 16]
+}
+Platform
+{
+	position : [5360, 240],
+	size : [224, 16]
+}
+Platform
+{
+	position : [5376, 224],
+	size : [192, 16]
+}
+Platform
+{
+	position : [5392, 192],
+	size : [160, 32]
+}
+Platform
+{
+	position : [5424, 144],
+	size : [96, 48]
+}
+Platform
+{
+	position : [5456, 64],
+	size : [16, 80]
+}
+Platform
+{
+	position : [5472, 64],
+	size : [80, 32]
+}
+Platform
+{
+	position : [5520, 96],
+	size : [64, 16]
+}
+Platform
+{
+	position : [5584, 352],
+	size : [16, 16]
+}
+Checkpoint
+{
+	position : [5408, 352],
+	size : [128, 16]
+}
+Platform
+{
+	position : [5360, 368],
+	size : [224, 48]
+}
+Platform
+{
+	position : [5616, 384],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5648, 400],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5680, 400],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5712, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5744, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5776, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5808, 432],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5840, 432],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5872, 432],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5904, 432],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5936, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5968, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [6000, 416],
+	size : [16, 16]
+}
+Platform
+{
+	position : [6032, 400],
+	size : [16, 16]
+}
+Platform
+{
+	position : [6064, 400],
+	size : [16, 16]
+}
+Platform
+{
+	position : [6096, 384],
+	size : [16, 16]
+}
+Platform
+{
+	position : [6128, 352],
+	size : [16, 16]
+}
+Platform
+{
+	position : [6144, 352],
+	size : [240, 48]
+}
+Platform
+{
+	position : [6160, 400],
+	size : [224, 80]
+}
+Spike
+{
+	position : [5616, 560],
+	size : [2896, 48]
+}
+Platform
+{
+	position : [6176, 480],
+	size : [208, 80]
+}
+Platform
+{
+	position : [6656, 352],
+	size : [384, 208]
+}

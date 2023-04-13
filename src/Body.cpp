@@ -46,7 +46,7 @@ bool Body::collides(Body const& arg)
 	{
 
 		
-		if(dis.left + dis.width < oth.left + speed.x + 10.f && dis.top + 1 >= oth.top)
+		if(dis.left + dis.width < oth.left + speed.x + 10.f && dis.top + dis.height * 9.f/10.f >= oth.top)
 		{
 			speed.x = 0;
 			center.x = oth.left - size.x / 2.f ;
@@ -54,7 +54,7 @@ bool Body::collides(Body const& arg)
 			on_wall = true;
 			collided_wall = true;
 		}
-		else if(dis.left > oth.left + oth.width + speed.x - 10.f && dis.top + 1 >= oth.top)
+		else if(dis.left > oth.left + oth.width + speed.x - 10.f && dis.top + dis.height * 9.f/10.f >= oth.top)
 		{
 			speed.x = 0;
 			center.x = oth.left + oth.width + size.x / 2.f;

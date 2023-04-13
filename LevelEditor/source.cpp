@@ -291,6 +291,7 @@ int main(int argc, char ** argv)
 	win.setFramerateLimit(30);
 
 	Button toggle_grid ({20.f, 410.f, 100.f, 30.f}, "Grid");
+	Button test ({680.f, 410.f, 100.f, 30.f}, "Test");
 	Button place ({20.f, 10.f, 100.f, 30.f}, "Place");
 		PlaceButton platform   ({20.f, 50.f, 100.f, 30.f}, "Platform", &place);
 		PlaceButton spike      ({20.f, 90.f, 100.f, 30.f}, "Spike", &place);
@@ -305,7 +306,8 @@ int main(int argc, char ** argv)
 		LineEdit lpath ({240.f, 50.f, 100.f, 30.f}, "default.lvl", &load);
 		Button lok ({240.f, 90.f, 100.f, 30.f}, "OK !", &load);
 
-	Widget * widgets[] = {&toggle_grid, &place, &platform, &spike, &player, &save, &path, &ok, &load, &lpath, &lok, &checkpoint};
+
+	Widget * widgets[] = {&toggle_grid, &place, &platform, &spike, &player, &save, &path, &ok, &load, &lpath, &lok, &checkpoint, &test};
 
 	toggle_grid.activated = true;
 
@@ -354,7 +356,7 @@ int main(int argc, char ** argv)
 			for(Widget * w : widgets)
 			{
 				w->onEvent(event);
-				
+
 				if(w->toString().find("PlaceButton") != string::npos)
 				{
 					PlaceButton * b ((PlaceButton*) w);
@@ -373,6 +375,13 @@ int main(int argc, char ** argv)
 			if(skip_event)
 				continue;
 
+			if(test.activated)
+			{
+				test.activated = false;
+
+				string command ("./game.out " + path.text.getString().toAnsiString());
+				system(command.c_str());
+			}
 
 			if(ok.activated)
 			{

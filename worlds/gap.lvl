@@ -1,0 +1,90 @@
+Platform
+{
+	position : [16, 336],
+	size : [768, 112]
+}
+Player
+{
+	position : [656, 192],
+	size : [48, 96]
+}
+Spike
+{
+	position : [-528, 304],
+	size : [544, 144]
+}
+Platform
+{
+	position : [-688, 128],
+	size : [160, 320]
+}
+Platform
+{
+	position : [-816, 176],
+	size : [128, 272]
+}
+Platform
+{
+	position : [-1232, 224],
+	size : [416, 224]
+}
+Checkpoint
+{
+	position : [-1104, 208],
+	size : [112, 16]
+}
+Platform
+{
+	position : [-224, 160],
+	size : [160, 16]
+}
+Platform
+{
+	position : [-480, 160],
+	size : [176, 16]
+}
+Platform
+{
+	position : [16, 176],
+	size : [96, 160]
+}
+Platform
+{
+	position : [112, 192],
+	size : [16, 144]
+}
+Platform
+{
+	position : [128, 208],
+	size : [16, 128]
+}
+Platform
+{
+	position : [144, 224],
+	size : [16, 112]
+}
+Platform
+{
+	position : [160, 240],
+	size : [32, 96]
+}
+Platform
+{
+	position : [192, 256],
+	size : [64, 80]
+}
+Platform
+{
+	position : [256, 272],
+	size : [80, 64]
+}
+Platform
+{
+	position : [336, 288],
+	size : [144, 48]
+}
+Platform
+{
+	position : [480, 304],
+	size : [288, 32]
+}

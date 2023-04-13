@@ -7,7 +7,7 @@
 using namespace sf;
 using namespace std;
 
-int main()
+int main(int argc, char ** argv)
 {
 
 	RenderWindow win (VideoMode(800, 450), "Plateform - Sama Rive", Style::Close);
@@ -16,8 +16,14 @@ int main()
 
 	win.setPosition(Vector2i(100, 100));
 
+	string to_load ("worlds/test.lvl");
 
-	World test ("worlds/test.lvl", 32.f);
+	if(argc > 1)
+	{
+		to_load = argv[1];
+	}
+
+	World test (to_load, 32.f);
 	test.load();
 
 	while(win.isOpen())
