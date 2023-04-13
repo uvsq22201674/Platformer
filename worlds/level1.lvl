@@ -858,3 +858,28 @@ Platform
 	position : [6656, 352],
 	size : [384, 208]
 }
+Platform
+{
+	position : [5456, 416],
+	size : [32, 144]
+}
+Platform
+{
+	position : [5488, 448],
+	size : [80, 16]
+}
+Platform
+{
+	position : [5376, 448],
+	size : [80, 16]
+}
+Platform
+{
+	position : [5488, 528],
+	size : [16, 16]
+}
+Platform
+{
+	position : [5440, 528],
+	size : [16, 16]
+}
